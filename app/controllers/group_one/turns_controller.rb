@@ -1,6 +1,9 @@
 module GroupOne
   class TurnsController < ApplicationController
     
+    def welcome
+    end
+
     def start
       session[:turn] = nil
       session[:user_id] = nil
@@ -30,7 +33,7 @@ module GroupOne
       end
 
       @turn   = session[:turn]
-      @round  = (@turn / 2) + 1
+      @round  = @turn
       
       @image_types = ['Animal', 'Humano', 'Objeto'].shuffle
       @image_codes = [rand(1..21), rand(1..21), rand(1..21)]

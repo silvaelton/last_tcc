@@ -1,3 +1,19 @@
-= simple_form_for :player, url: group_one_name_path, method: :get do |f|
-  = f.input :name, label: false
-  = f.submit 'iniciar'
+.container
+  %br/
+  %br/
+  %br/
+  .row
+    .col-md-12{style: 'text-align:center'}
+      %h1 
+        %b Vamos começar. Qual é seu nome?
+  %br/
+  %br/
+  %br/
+  %br/
+  .row{style: 'text-align:center'}
+    .col-md-12
+      = simple_form_for :player, url: group_one_name_path, method: :get do |f|
+        .row
+          .col-md-6.col-md-offset-3
+            = f.input :name, label: false, placeholder: "Digite aqui seu nome..."
+        = f.submit 'Prosseguir', class: 'btn btn-success btn-lg'
