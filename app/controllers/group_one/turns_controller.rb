@@ -52,6 +52,7 @@ module GroupOne
     end
 
     def success
+      @name = Player.find(session[:user_id]).name
     end
 
   end
