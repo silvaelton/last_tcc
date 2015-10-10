@@ -24,9 +24,32 @@ module GroupOne
     end
 
     def loop
-      session[:turn] = 0 if session[:turn].nil?
+      session[:turn]    = 0 if session[:turn].nil?
+      session[:animal]  = 0  if session[:animal].nil?
+      session[:humano]  = 0  if session[:humano].nil?
+      session[:objeto]  = 0  if session[:objeto].nil?
 
       if session[:turn].to_i < 90
+        if session[:turn].to_i <= 10
+          @ponto  = Hash.new
+          @ponto['Animal'] = "1 Ponto"
+          @ponto['Objeto'] = "Não pontua!"
+          @ponto['Humano'] = "Não pontua!"
+        end
+
+        if session[:turn].to_i > 10 && session[:turn].to_i <= 50
+          @ponto  = Hash.new
+          @ponto['Animal'] = ((session[:animal].to_i % 2) == 0) ? "1 Ponto" : "Não pontua"
+          @ponto['Objeto'] = ((session[:objeto].to_i % 4) == 0) ? "1 Ponto" : "Não pontua"
+          @ponto['Humano'] = "1 Ponto"
+        end
+
+        if session[:turn].to_i > 50
+          @ponto  = Hash.new
+          @ponto['Animal'] = ((session[:animal].to_i % 2) == 0) ? "1 Ponto" : "Não pontua"
+          @ponto['Objeto'] = "Não pontua"
+          @ponto['Humano'] = "1 Ponto"
+        end
         session[:turn] += 1
       else
         redirect_to action: 'success'
@@ -44,6 +67,25 @@ module GroupOne
     def point
       if params[:choice].present?
         @point = Point.new(group_id: 1, choice: params[:choice], user_id: session[:user_id])
+
+        if session[:turn].to_i > 10 && session[:turn].to_i <= 50
+          if params[:choice] == "Animal"
+            session[:animal] = 1  if session[:animal].nil?
+            session[:animal] += 1 if session[:animal].present?
+          end
+
+          if params[:choice] == "Objeto"
+            session[:objeto]  = 1  if session[:objeto].nil?
+            session[:objeto] += 1  if session[:objeto].present?
+          end
+        end
+
+        if session[:turn].to_i > 50
+          if params[:choice] == "Animal"
+            session[:animal] = 1  if session[:animal].nil?
+            session[:animal] += 1 if session[:animal].present?
+          end
+        end
 
         if @point.save
           redirect_to action: 'loop'
