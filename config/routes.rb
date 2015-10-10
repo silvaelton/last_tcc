@@ -9,9 +9,7 @@ Rails.application.routes.draw do
     get  '/sucesso',   to: 'turns#success',     as: 'success'
     get  '/nome',      to: 'turns#name',        as: 'name'
     
-    scope 'relatorio' do 
-      get '/', to: 'reports#index'
-    end
+    get '/resultado',  to: 'reports#index',     as: 'result'
   end
   
   namespace :group_two do 

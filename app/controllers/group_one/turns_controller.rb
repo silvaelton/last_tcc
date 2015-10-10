@@ -61,6 +61,7 @@ module GroupOne
       @image_types = ['Animal', 'Humano', 'Objeto'].shuffle
       @image_codes = [rand(1..21), rand(1..21), rand(1..21)]
 
+      @player = Player.find(session[:user_id])
       @images = [@image_types, @image_codes]
     end
 
