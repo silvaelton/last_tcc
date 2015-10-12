@@ -23,9 +23,10 @@ ActiveRecord::Schema.define(version: 20151005174814) do
   create_table "points", force: :cascade do |t|
     t.integer  "group_id"
     t.integer  "user_id"
+    t.string   "player",     default: "pessoa"
     t.string   "choice"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   add_index "points", ["user_id"], name: "index_points_on_user_id"

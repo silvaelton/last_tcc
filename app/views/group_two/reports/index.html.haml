@@ -10,12 +10,12 @@
           %tr
             %th #
             %th Nome
-            %th Pontuação
-            %th Jogadas
+            %th Pontuação Jogador
+            %th Pontuação Computador
         %tbody
           - @players.each_with_index do |player, index|
             %tr
               %td.col-md-1= index + 1
               %td.col-md-2= player.name
-              %td.col-md-2= (player.points.count == 90) ? player.point_grupo_one : "não completou"
-              %td.col-md-2= player.points.count
+              %td.col-md-2= (player.points.where(player: 'pessoa').count == 90) ? player.point_grupo_two_person : "não completou"
+              %td.col-md-2= (player.points.where(player: 'computador').count == 90) ? player.point_grupo_two_cpu : "não completou"

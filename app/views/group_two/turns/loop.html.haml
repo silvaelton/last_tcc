@@ -1,0 +1,48 @@
+.container
+  .row
+    .col-md-4{style: 'text-align:left'}
+      %h1 
+        %b
+          Rodada
+          = @round
+    .col-md-4{style: 'text-align:center'}
+      - if @player_turn == 1
+        %h2 
+          %b
+            Sua vez!
+      - else
+        %h2 
+          %b
+            Jogada do computador!
+
+    .col-md-4{style: 'text-align:right'}
+      %h4{style:'color: green'}
+        %b Sua Pontuação: #{@player.point_grupo_two_person}
+      %h4{style:'color: blue'}
+        %b Computador Pontuação: #{@player.point_grupo_two_cpu}
+%hr/
+%br/
+%br/
+%br/
+.row
+  .col-sm-6.col-md-4{style: 'text-align: center'}
+    %a{href: "#{group_two_point_path(choice: "#{@images[0][0]}")}"}
+      %img{:alt => "Generic placeholder thumbnail", :src => "http://tccgame.s3-website-sa-east-1.amazonaws.com/images/#{@images[0][0]}#{@images[1][0]}.png", width: 250, id: "#{@images[0][0]}" }/
+  .col-sm-6.col-md-4{style: 'text-align: center'}
+    %a{href: "#{group_two_point_path(choice: "#{@images[0][1]}")}"}
+      %img{:alt => "Generic placeholder thumbnail", :src => "http://tccgame.s3-website-sa-east-1.amazonaws.com/images/#{@images[0][1]}#{@images[1][1]}.png", width: 250, id: "#{@images[0][1]}" }/
+  .col-sm-6.col-md-3{style: 'text-align: center'}
+    %a{href: "#{group_two_point_path(choice: "#{@images[0][2]}")}"}
+      %img{:alt => "Generic placeholder thumbnail", :src => "http://tccgame.s3-website-sa-east-1.amazonaws.com/images/#{@images[0][2]}#{@images[1][2]}.png", width: 250, id:"#{@images[0][2]}"}/
+
+- if @player_turn == 2
+  :javascript
+    $(document).ready(function(){
+      $('a').css("pointer-events", "none");
+      setInterval(function(){ 
+        $('#Objeto').css('border','solid 10px #2CC0D2')
+      }, 1000);
+      setInterval(function(){ 
+        $(location).attr('href', "#{group_two_point_path(choice: 'Objeto')}")
+      }, 2500);
+    })

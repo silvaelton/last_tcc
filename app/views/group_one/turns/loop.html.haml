@@ -8,8 +8,10 @@
     .col-md-4{style: 'text-align:center'}
       %h2 
         %b
-          Escolha uma imagem!
+          Escolha uma imagem
     .col-md-4{style: 'text-align:right'}
+      %h2
+        %b Pontuação #{@player.point_grupo_one}
 
   
 %hr/
@@ -17,26 +19,13 @@
 %br/
 %br/
 .row
-  .col-sm-6.col-md-4
-    .thumbnail
-      %a{href: "#{group_one_point_path(choice: "#{@images[0][0]}")}"}
-        %img{:alt => "Generic placeholder thumbnail", :src => "http://tccgame.s3-website-sa-east-1.amazonaws.com/images/#{@images[0][0]}#{@images[1][0]}.png", width: 250}/
-    .caption{style: 'text-align:center'}
-      %h3
-        %b= @ponto[@images[0][0]]
-
-  .col-sm-6.col-md-4
-    .thumbnail
-      %a{href: "#{group_one_point_path(choice: "#{@images[0][1]}")}"}
-        %img{:alt => "Generic placeholder thumbnail", :src => "http://tccgame.s3-website-sa-east-1.amazonaws.com/images/#{@images[0][1]}#{@images[1][1]}.png", width: 250}/
-    .caption{style: 'text-align:center'}
-      %h3
-        %b= @ponto[@images[0][1]]
-  .col-sm-6.col-md-3
-    .thumbnail
-      %a{href: "#{group_one_point_path(choice: "#{@images[0][2]}")}"}
-        %img{:alt => "Generic placeholder thumbnail", :src => "http://tccgame.s3-website-sa-east-1.amazonaws.com/images/#{@images[0][2]}#{@images[1][2]}.png", width: 250}/
-    .caption{style: 'text-align:center'}
-      %h3
-        %b= @ponto[@images[0][2]]
+  .col-sm-6.col-md-4{style: 'text-align: center'}
+    %a{href: "#{group_one_point_path(choice: "#{@images[0][0]}")}"}
+      %img{:alt => "Generic placeholder thumbnail", :src => "http://tccgame.s3-website-sa-east-1.amazonaws.com/images/#{@images[0][0]}#{@images[1][0]}.png", width: 250}/
+  .col-sm-6.col-md-4{style: 'text-align: center'}
+    %a{href: "#{group_one_point_path(choice: "#{@images[0][1]}")}"}
+      %img{:alt => "Generic placeholder thumbnail", :src => "http://tccgame.s3-website-sa-east-1.amazonaws.com/images/#{@images[0][1]}#{@images[1][1]}.png", width: 250}/
+  .col-sm-6.col-md-3{style: 'text-align: center'}
+    %a{href: "#{group_one_point_path(choice: "#{@images[0][2]}")}"}
+      %img{:alt => "Generic placeholder thumbnail", :src => "http://tccgame.s3-website-sa-east-1.amazonaws.com/images/#{@images[0][2]}#{@images[1][2]}.png", width: 250}/
       
