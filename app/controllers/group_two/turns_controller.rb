@@ -43,8 +43,16 @@ module GroupTwo
       @round  = @turn
       @player_turn = session[:player_turn]
       
-      @image_types = ['Animal', 'Humano', 'Objeto'].shuffle
-      @image_codes = [rand(1..21), rand(1..21), rand(1..21)]
+      if session[:player_turn] == 1
+        @image_types = ['Animal', 'Humano', 'Objeto'].shuffle
+        @image_codes = [rand(1..21), rand(1..21), rand(1..21)]
+        session[:image_codes] = @image_codes
+        session[:image_types] = @image_types
+      else
+        @image_codes = session[:image_codes]
+        @image_types = session[:image_types]
+      end
+      
 
       @player = Player.find(session[:user_id])
       @images = [@image_types, @image_codes]
