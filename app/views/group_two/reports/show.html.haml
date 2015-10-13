@@ -1,0 +1,32 @@
+.container
+  .row
+    .col-md-12
+      %h1
+        %b Pontuação detalhada
+        %br/
+        %small Partida: #{@player.id} | Jogador: #{@player.name}
+  .row
+    .col-md-12
+      = link_to "Voltar para resultados", group_two_result_path
+  %hr/
+  .row
+    .col-md-3
+      Total de Jogadas: #{@player.points.count}
+    .col-md-3
+      Pontuação: #{@player.point_grupo_one}
+  %hr/
+  .row
+    .col-md-12
+      %table.table.table-striped.table-bordered
+        %thead
+          %tr
+            %th Jogador
+            %th Jogada
+            %th Escolha
+        %tbody
+          - @player.points.each_with_index do |point, index|
+            %tr
+              %th= (point.player == "pessoa") ? @player.name : "computador"
+              %th= index + 1
+              %th= point.choice
+

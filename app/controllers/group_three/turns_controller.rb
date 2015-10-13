@@ -1,4 +1,4 @@
-module GroupTwo
+module GroupThree
   class TurnsController < ApplicationController
     
     def welcome
@@ -12,7 +12,7 @@ module GroupTwo
     
     def name
       if params[:player].present? && params[:player][:name].present?
-        @user = Player.new(name: params[:player][:name], group_id: 2)
+        @user = Player.new(name: params[:player][:name], group_id: 3)
         if @user.save 
           session[:user_id] = @user.id
           redirect_to action: 'loop'
@@ -31,16 +31,30 @@ module GroupTwo
       if session[:turn].to_i == 90 && session[:player_turn].to_i == 2
          session[:turn] += 1
       end
-      
-      if session[:turn].to_i < 90
-        session[:player_turn] += 1
 
+      if session[:turn].to_i <= 90
+        session[:player_turn] += 1
+        
         if session[:player_turn] == 3
           session[:player_turn] = 1
           session[:turn] += 1 
         end
       else
         redirect_to action: 'success'
+      end
+
+      if session[:turn].to_i <= 20
+        @computer = "Objeto"
+      end
+
+      if session[:turn].to_i > 20 && session[:turn].to_i <= 32 
+        @computer = 'Animal' if %w(21 23 26 30 31).include? session[:turn].to_s
+        @computer = 'Objeto' if %w(22 24 25 29 32).include? session[:turn].to_s
+        @computer = 'Humano' if %w(27 28).include? session[:turn].to_s
+      end
+
+      if session[:turn].to_i > 32 && session[:turn].to_i <= 90
+        @computer = "Humano"
       end
 
       @turn   = session[:turn]
@@ -66,7 +80,7 @@ module GroupTwo
       if params[:choice].present?
         @player = (session[:player_turn] == 1) ? 'pessoa' : 'computador'
 
-        @point = Point.new(group_id: 2, choice: params[:choice], player: @player, user_id: session[:user_id])
+        @point = Point.new(group_id: 3, choice: params[:choice], player: @player, user_id: session[:user_id])
         
         if @point.save
           redirect_to action: 'loop'

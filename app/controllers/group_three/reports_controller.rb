@@ -1,8 +1,8 @@
-module GroupTwo
+module GroupThree
   class ReportsController < ApplicationController
     
     def index
-      @players = Player.where(group_id: 2)
+      @players = Player.where(group_id: 3)
     end
 
     def show

@@ -1,21 +1,27 @@
 .container
   .row
     .col-md-12
-      %h1 Grupo 1
+      %h1 
+        %b Grupo 1
   %hr/
   .row
     .col-md-12
-      %table.table.table-striped.table-condensed
+      %table.table.table-striped.table-condensed.table-bordered
         %thead
           %tr
             %th #
             %th Nome
             %th Pontuação
             %th Jogadas
+            %th Status
+            %th Ação
         %tbody
           - @players.each_with_index do |player, index|
             %tr
               %td.col-md-1= index + 1
               %td.col-md-2= player.name
-              %td.col-md-2= (player.points.count == 90) ? player.point_grupo_one : "não completou"
+              %td.col-md-2= player.point_grupo_one
               %td.col-md-2= player.points.count
+              %td.col-md-2= (player.points.count == 90) ? "completou" : "não completou"
+              %td.col-md-2
+                = link_to "detalhar", group_one_result_show_path(player)
