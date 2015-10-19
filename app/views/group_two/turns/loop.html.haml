@@ -16,10 +16,26 @@
             Jogada do computador!
 
     .col-md-4{style: 'text-align:right'}
-      %h4{style:'color: green'}
-        %b Sua Pontuação: #{@player.point_grupo_two_person}
-      %h4{style:'color: blue'}
-        %b Computador Pontuação: #{@player.point_grupo_two_cpu}
+      - if @bingo_player
+        %h3
+          = image_tag '/check.png', width: 20
+          %b#pisca{style: 'color: green'}
+            %i Sua Pontuação: #{@player.point_grupo_two_person}
+      - else
+        %h3
+          %b 
+            %i Sua Pontuação: #{@player.point_grupo_two_person}
+
+      - if @bingo_cpu
+        %h3
+          = image_tag '/check.png', width: 20
+          %b#pisca{style: 'color: blue'}
+            %b
+              %i Computador Pontuação: #{@player.point_grupo_two_cpu}
+      - else
+        %h3
+          %b 
+            %i Computador Pontuação: #{@player.point_grupo_two_cpu}
 %hr/
 %br/
 %br/
@@ -46,3 +62,37 @@
         $(location).attr('href', "#{group_two_point_path(choice: 'Objeto')}")
       }, 3500);
     })
+
+- if @bingo_player
+  :javascript
+    $(document).ready(function(){
+      var index = 0
+      $("#pisca").css("opacity","0.4");
+        setInterval(function() {
+          if(index < 10) {
+            index++
+            if($("#pisca").css("opacity") == 0){
+              $("#pisca").css("opacity","1");
+            }else{
+              $("#pisca").css("opacity","0");
+            }
+          }  
+        }, 100);
+     });
+
+- if @bingo_cpu
+  :javascript
+    $(document).ready(function(){
+      var index = 0
+      $("#pisca").css("opacity","0.4");
+        setInterval(function() {
+          if(index < 10) {
+            index++
+            if($("#pisca").css("opacity") == 0){
+              $("#pisca").css("opacity","1");
+            }else{
+              $("#pisca").css("opacity","0");
+            }
+          }  
+        }, 100);
+     });

@@ -25,6 +25,9 @@ module GroupThree
     end
 
     def loop
+      @bingo_player = false
+      @bingo_cpu = false
+      
       session[:turn]        = 1 if session[:turn].nil?
       session[:player_turn] = 0 if session[:player_turn].nil?
 
@@ -73,6 +76,27 @@ module GroupThree
       
 
       @player = Player.find(session[:user_id])
+
+
+      
+      if session[:current_point_player].nil?
+        session[:current_point_player] = @player.point_grupo_two_person 
+      else
+        if session[:current_point_player] != @player.point_grupo_two_person
+          @bingo_player =  true
+          session[:current_point_player] = @player.point_grupo_two_person 
+        end
+      end
+
+      if session[:current_point_cpu].nil?
+        session[:current_point_cpu] = @player.point_grupo_two_cpu 
+      else
+        if session[:current_point_cpu] != @player.point_grupo_two_cpu
+          @bingo_cpu =  true
+          session[:current_point_cpu] = @player.point_grupo_two_cpu 
+        end
+      end
+
       @images = [@image_types, @image_codes]
     end
 

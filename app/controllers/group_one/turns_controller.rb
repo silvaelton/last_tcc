@@ -24,6 +24,7 @@ module GroupOne
     end
 
     def loop
+      @bingo = false
       session[:turn]    = 0 if session[:turn].nil?
      
       if session[:turn].to_i < 90
@@ -39,6 +40,16 @@ module GroupOne
       @image_codes = [rand(1..21), rand(1..21), rand(1..21)]
 
       @player = Player.find(session[:user_id])
+
+      if session[:current_point].nil?
+        session[:current_point] = @player.point_grupo_one 
+      else
+        if session[:current_point] != @player.point_grupo_one
+          @bingo =  true
+          session[:current_point] = @player.point_grupo_one 
+        end
+      end
+      
       @images = [@image_types, @image_codes]
     end
 

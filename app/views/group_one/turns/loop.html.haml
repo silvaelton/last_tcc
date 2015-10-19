@@ -8,10 +8,16 @@
     .col-md-4{style: 'text-align:center'}
       %h2 
         %b
-          Escolha uma imagem
+          %i escolha uma imagem
     .col-md-4{style: 'text-align:right'}
-      %h2
-        %b Pontuação #{@player.point_grupo_one}
+      - if @bingo
+        %h2
+          = image_tag '/check.png', width: 20
+          %b#pisca{style: 'color: green'}
+            %i Pontuação: #{@player.point_grupo_one}
+      - else
+        %h2
+          %b Pontuação: #{@player.point_grupo_one}
 
   
 %hr/
@@ -28,4 +34,20 @@
   .col-sm-6.col-md-3{style: 'text-align: center'}
     %a{href: "#{group_one_point_path(choice: "#{@images[0][2]}")}"}
       %img{:alt => "Generic placeholder thumbnail", :src => "http://tccgame.s3-website-sa-east-1.amazonaws.com/images/#{@images[0][2]}#{@images[1][2]}.png", width: 250}/
-      
+
+- if @bingo
+  :javascript
+    $(document).ready(function(){
+      var index = 0
+      $("#pisca").css("opacity","0.4");
+        setInterval(function() {
+          if(index < 10) {
+            index++
+            if($("#pisca").css("opacity") == 0){
+              $("#pisca").css("opacity","1");
+            }else{
+              $("#pisca").css("opacity","0");
+            }
+          }  
+        }, 100);
+     });
