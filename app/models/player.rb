@@ -1,6 +1,8 @@
 class Player < ActiveRecord::Base
   has_many :points, foreign_key: 'user_id'
 
+  default_scope {order('id ASC')}
+  
   def point_grupo_one
     index_point = 0
     object = 0

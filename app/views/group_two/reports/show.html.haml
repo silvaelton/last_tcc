@@ -11,7 +11,7 @@
   %hr/
   .row
     .col-md-3
-      Total de Jogadas: #{@player.points.count}
+      Total de Jogadas: #{@player.points.limit(180).count}
     .col-md-3
       Pontuação: #{@player.point_grupo_one}
   %hr/
@@ -24,7 +24,7 @@
             %th Jogada
             %th Escolha
         %tbody
-          - @player.points.each_with_index do |point, index|
+          - @player.points.limit(180).each_with_index do |point, index|
             %tr
               %th= (point.player == "pessoa") ? @player.name : "computador"
               %th= index + 1
