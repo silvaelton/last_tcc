@@ -2,7 +2,7 @@ module GroupThree
   class ReportsController < ApplicationController
     
     def index
-      @players = Player.where(group_id: 3)
+      @players = Player.where(group_id: 3).limit(180)
     end
 
     def show

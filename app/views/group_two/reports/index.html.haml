@@ -23,7 +23,7 @@
               %td.col-md-2= player.name
               %td.col-md-2= player.point_grupo_two_person
               %td.col-md-2= player.point_grupo_two_cpu
-              %td.col-md-2= player.points.count
-              %td.col-md-2= (player.points.count == 90) ? "completou" : "não completou"
+              %td.col-md-2= player.points.limit(180).count
+              %td.col-md-2= (player.points.count >= 90) ? "completou" : "não completou"
               %td.col-md-2
                 = link_to "detalhar", group_two_result_show_path(player)
